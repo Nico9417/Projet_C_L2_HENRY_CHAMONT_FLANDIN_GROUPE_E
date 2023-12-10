@@ -3,6 +3,15 @@
 #include <string.h>
 #include "contact.h"
 
+//Fonction pour écrire une chaîne de caractère
+
+char *scanString()
+{
+    char *mot = (char *)malloc(100*sizeof(char));
+    scanf("%s", mot);
+    return mot;
+}
+
 //Fonction pour créer et initialiser une variable de type Contact avec des valeurs
 
 Contact* creerContact(const char* nom, const char* prenom) 
