@@ -102,10 +102,11 @@ int isInList(t_sk_list *liste, int level, int valeur)
 
 //Fonction permettant de savoir si la valeur est dans la liste en parcourant tous ces niveaux
 
-void isInlistAll(t_sk_list *liste, int valeur){
+void isInlistAll(t_sk_list *liste, int valeur) {
     int level = 4;
     t_sk_cell *current = liste->heads[level];
-    t_sk_cell *prev = current;
+    t_sk_cell *prev = NULL;
+
     while (level >= 0) {
         while (current != NULL) {
             if (current->value == valeur) {
@@ -118,17 +119,16 @@ void isInlistAll(t_sk_list *liste, int valeur){
             prev = current;
             current = current->next[level];
         }
+
         --level;
         if (level >= 0) {
-            if (prev != NULL){
+            if (prev != NULL) {
                 current = prev->next[level];
             } else {
                 current = liste->heads[level];
             }
         }
     }
-    printf("La valeur %d n'est pas dans la liste\n", valeur);
-    return;
 }
 
 //Fonction permettant de faire n recherches aléatoires dans la liste à tous les niveaux
