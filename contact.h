@@ -1,31 +1,52 @@
-#define _CONTACT_H_
+#include "fichier.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct contact{
-    char *nom;
-    char *prénom;
-};
+typedef struct s_sk_cell_3 {
+    int value;
+    int nb_level;
+    struct s_sk_cell** next;
+} t_sk_cell_3, *ptr_cell_3;
 
-typedef struct TIME {
-    int heure;
-    int minute;
-};
+typedef struct s_sk_list_3 {
+    t_sk_cell** heads;
+    int max_cell;
+} t_sk_list_3;
 
-typedef struct DATE{
+typedef struct s_contact {
+    char* nom;
+    char* prenom;
+    struct s_contact* next;
+} Contact;
+
+typedef struct s_date {
     int jour;
     int mois;
-    int année;
-};
+    int annee;
+} Date;
 
-typedef struct info_rdv{
-    struct DATE *date;
-    struct TIME *heure;
-    struct TIME *durée;
-    char *objet;
-};
+typedef struct s_heure {
+    int heure;
+    int minute;
+} Heure;
 
-typedef struct liste_rdv{
-    struct info_rdv *rdv;
-    struct liste_rdv *suivant;
-};
+typedef struct s_rdv {
+    Date date;
+    Heure heure;
+    Heure duree;
+    char* objet;
+    struct s_rdv* next;
+} RDV;
 
-char *scanString();
+//Nos fonctions 
+
+char *scanString(void);
+
+Contact* creerContact(const char* nom, const char* prenom);
+
+RDV* creerRendezVous(int jour, int mois, int annee, int heure, int minute, int dureeHeure, int dureeMinute, const char* objet);
+
+void libererContact(Contact* contact);
+
+void libererRendezVous(RDV* rendezVous);
